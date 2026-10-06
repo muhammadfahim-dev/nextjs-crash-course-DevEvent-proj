@@ -1,3 +1,4 @@
+import { getEvents } from "@/actions/getEvent.action";
 import EventCard from "@/components/EventCard";
 import ExploreBtn from "@/components/ExploreBtn";
 import { Event } from "@/models/event.model";
@@ -11,8 +12,7 @@ const page = async () => {
   "use cache";
   cacheLife("hours");
 
-  const response = await axios.get<ApiResponse>(`${BASE_URL}/api/events`);
-  const events = response.data.events;
+  const events = await getEvents();
   return (
     <section>
       <h1 className="text-center">
@@ -31,7 +31,7 @@ const page = async () => {
           {events &&
             events.length > 0 &&
             events.map((event: Event, i) => (
-              <li key={i}>
+              <li key={event._id}>
                 <EventCard {...event} />
               </li>
             ))}

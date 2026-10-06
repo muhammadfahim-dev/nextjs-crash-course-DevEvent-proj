@@ -14,6 +14,7 @@ export async function createBooking({
   try {
     await BookingModel.create({ eventId, slug, email });
 
+    
     return { success: true };
   } catch (error) {
     console.error("creaing Event Fialed", error);
