@@ -5,13 +5,13 @@ import { ApiResponse } from "@/types/apiResponse";
 import axios from "axios";
 import { cacheLife } from "next/cache";
 
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+
 const page = async () => {
-  "use cache"
-  cacheLife("hours")
-  
-  const response = await axios.get<ApiResponse>(
-    "http://localhost:3000/api/events",
-  );
+  "use cache";
+  cacheLife("hours");
+
+  const response = await axios.get<ApiResponse>(`${BASE_URL}/api/events`);
   const events = response.data.events;
   return (
     <section>
